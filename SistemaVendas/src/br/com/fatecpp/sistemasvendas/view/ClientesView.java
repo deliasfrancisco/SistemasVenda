@@ -2,9 +2,14 @@ package br.com.fatecpp.sistemasvendas.view;
 
 import br.com.fatecpp.sistemasvendas.model.dao.ClienteDAO;
 import br.com.fatecpp.sistemasvendas.model.domain.Cliente;
+import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 public class ClientesView extends javax.swing.JInternalFrame {
+    
+    private DefaultTableModel modelo;
+    private List<Cliente> resultado;
 
     public ClientesView() {
         initComponents();
@@ -48,7 +53,7 @@ public class ClientesView extends javax.swing.JInternalFrame {
         });
         getContentPane().add(btnInserir, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 180, 73, -1));
 
-        pack();
+        setBounds(480, 215, 410, 251);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnInserirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInserirActionPerformed
