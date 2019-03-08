@@ -77,13 +77,13 @@ public class ClienteDAO implements DAOGenerico<Cliente> {
         q = em.createNamedQuery("Cliente.findAll");
         } else if (opcao.equals("consultarPorId")){
         q = em.createNamedQuery("Cliente.findByIdCliente");
-        q.setParameter(":idCliente", parametro);
+        q.setParameter("idCliente", parametro);
         } else if (opcao.equals("consultarPorNome")){
         q = em.createNamedQuery("Cliente.findByNome");
-        q.setParameter(":nome", "%" + parametro + "%");
+        q.setParameter("nome", "%" + parametro + "%");
         } else if (opcao.equals("consultarPorEmail")){
         q = em.createNamedQuery("Cliente.findByEmail");
-        q.setParameter(":email", "%" + parametro + "%");
+        q.setParameter("email", "%" + parametro + "%");
         }
         return q.getResultList();
     }
