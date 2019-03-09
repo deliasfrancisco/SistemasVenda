@@ -32,6 +32,8 @@ public class ClientesView extends javax.swing.JInternalFrame {
         btnPesquisar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblTabela = new javax.swing.JTable();
+        btnAlterar = new javax.swing.JButton();
+        btnExcluir = new javax.swing.JButton();
 
         setClosable(true);
         setTitle("Gerenciamento de Clientes");
@@ -93,9 +95,27 @@ public class ClientesView extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
+        tblTabela.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblTabelaMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblTabela);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, 370, 200));
+
+        btnAlterar.setText("Alterar");
+        btnAlterar.setEnabled(false);
+        btnAlterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlterarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnAlterar, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 180, -1, -1));
+
+        btnExcluir.setText("Excluir");
+        btnExcluir.setEnabled(false);
+        getContentPane().add(btnExcluir, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 180, -1, -1));
 
         setBounds(480, 215, 410, 537);
     }// </editor-fold>//GEN-END:initComponents
@@ -108,6 +128,7 @@ public class ClientesView extends javax.swing.JInternalFrame {
 
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
         modelo = (DefaultTableModel)tblTabela.getModel();
+        String texto = txtParametro.getText();
         String opcao = cmbOpcao.getSelectedItem().toString();
         if (opcao.equals("Codigo")){
             resultado = ClienteDAO.getUnicaInstancia().consultar("ConsultarPorId", txtParametro.getText());
@@ -116,21 +137,55 @@ public class ClientesView extends javax.swing.JInternalFrame {
         }else if (opcao.equals("Email")){
             resultado = ClienteDAO.getUnicaInstancia().consultar("ConsultarPorEmail", txtParametro.getText());
         }
-        if (resultado.size() > 0){
-            modelo.removeRow(0);
-        }
-        for(Cliente c : resultado){
-            modelo.addRow(
+        if (resultado.size() > 0) {
+            while (modelo.getRowCount() > 0) {
+               modelo.removeRow(0);
+            }
+            for (Cliente c :  resultado) {
+                modelo.addRow(
                     new Object[]{
-                        c.getIdCliente(),
-                        c.getEmail(),
-                        c.getEmail()
-                    });
+                    c.getIdCliente(),
+                    c.getNome(),
+                    c.getEmail()
+                });
+            }
+        } else {
+            JOptionPane.showConfirmDialog(null, "Nenhuma resgistro encontrado!");
         }
     }//GEN-LAST:event_btnPesquisarActionPerformed
 
+    private void tblTabelaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTabelaMouseClicked
+        btnAlterar.setEnabled(true);
+        btnExcluir.setEnabled(true);
+        btnInserir.setEnabled(false);
+        int i = tblTabela.getSelectedRow();
+        txtCodigo.setText(
+                String.valueOf(
+                        resultado.get(i)
+                                .getIdCliente()));
+        txtNome.setText(resultado.get(i).getNome());
+        txtEmail.setText(resultado.get(i).getEmail());
+    }//GEN-LAST:event_tblTabelaMouseClicked
+
+    private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
+        Cliente cliente = new Cliente(
+                Integer.parseInt(txtNome.getText()),
+                        txtNome.getText(),
+                        txtEmail.getText());
+        ClienteDAO.getUnicaInstancia().alterar(cliente);
+        JOptionPane.showMessageDialog(null, "Registro alterado");
+        txtCodigo.setText("");
+        txtNome.setText("");
+        txtEmail.setText("");
+        btnAlterar.setEnabled(true);
+        btnInserir.setEnabled(false);
+        btnExcluir.setEnabled(false);
+    }//GEN-LAST:event_btnAlterarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAlterar;
+    private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnInserir;
     private javax.swing.JButton btnPesquisar;
     private javax.swing.JComboBox<String> cmbOpcao;

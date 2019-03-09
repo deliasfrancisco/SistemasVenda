@@ -14,9 +14,9 @@ import javax.persistence.Table;
 @Table(name = "cliente") //nome tabela
 @NamedQueries({ //vem para facilitar a consulta no banco de dados
     @NamedQuery(name = "Cliente.findAll", query = "SELECT c FROM Cliente c") //consultas em cima da classe e não da tabela do banco
-    , @NamedQuery(name = "Cliente.findByIdCliente", query = "SELECT c FROM Cliente c WHERE c.idCliente = :idCliente")
-    , @NamedQuery(name = "Cliente.findByNome", query = "SELECT c FROM Cliente c WHERE c.nome = :nome")
-    , @NamedQuery(name = "Cliente.findByEmail", query = "SELECT c FROM Cliente c WHERE c.email = :email")})
+    , @NamedQuery(name = "Cliente.findByIdCliente", query = "SELECT c FROM Cliente c WHERE c.idCliente like :idCliente")
+    , @NamedQuery(name = "Cliente.findByNome", query = "SELECT c FROM Cliente c WHERE c.nome like :nome")
+    , @NamedQuery(name = "Cliente.findByEmail", query = "SELECT c FROM Cliente c WHERE c.email like :email")})
 public class Cliente implements Serializable {
 
     private static final long serialVersionUID = 1L;

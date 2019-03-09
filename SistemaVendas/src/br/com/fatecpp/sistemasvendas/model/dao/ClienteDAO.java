@@ -73,15 +73,15 @@ public class ClienteDAO implements DAOGenerico<Cliente> {
 
         //A variável q armazena o resultado da consulta
         Query q = null;
-        if (opcao.equals("consultarTodos")) {
+        if (opcao.equals("ConsultarTodos")) {
         q = em.createNamedQuery("Cliente.findAll");
-        } else if (opcao.equals("consultarPorId")){
+        } else if (opcao.equals("ConsultarPorId")){
         q = em.createNamedQuery("Cliente.findByIdCliente");
         q.setParameter("idCliente", parametro);
-        } else if (opcao.equals("consultarPorNome")){
+        } else if (opcao.equals("ConsultarPorNome")){
         q = em.createNamedQuery("Cliente.findByNome");
         q.setParameter("nome", "%" + parametro + "%");
-        } else if (opcao.equals("consultarPorEmail")){
+        } else if (opcao.equals("ConsultarPorEmail")){
         q = em.createNamedQuery("Cliente.findByEmail");
         q.setParameter("email", "%" + parametro + "%");
         }
