@@ -17,10 +17,10 @@ import javax.persistence.Table;
 @Table(name = "fornecedor_produto")
 @NamedQueries({
     @NamedQuery(name = "FornecedorProduto.findAll", query = "SELECT f FROM FornecedorProduto f")
-    , @NamedQuery(name = "FornecedorProduto.findByIdFornecedorProduto", query = "SELECT f FROM FornecedorProduto f WHERE f.idFornecedorProduto = :idFornecedorProduto")
-    , @NamedQuery(name = "FornecedorProduto.findByEstoque", query = "SELECT f FROM FornecedorProduto f WHERE f.estoque = :estoque")
-    , @NamedQuery(name = "FornecedorProduto.findByPrecoCusto", query = "SELECT f FROM FornecedorProduto f WHERE f.precoCusto = :precoCusto")
-    , @NamedQuery(name = "FornecedorProduto.findByPrecoUnitario", query = "SELECT f FROM FornecedorProduto f WHERE f.precoUnitario = :precoUnitario")})
+    , @NamedQuery(name = "FornecedorProduto.findByIdFornecedorProduto", query = "SELECT f FROM FornecedorProduto f WHERE f.idFornecedorProduto like :idFornecedorProduto")
+    , @NamedQuery(name = "FornecedorProduto.findByEstoque", query = "SELECT f FROM FornecedorProduto f WHERE f.estoque like :estoque")
+    , @NamedQuery(name = "FornecedorProduto.findByPrecoCusto", query = "SELECT f FROM FornecedorProduto f WHERE f.precoCusto like :precoCusto")
+    , @NamedQuery(name = "FornecedorProduto.findByPrecoUnitario", query = "SELECT f FROM FornecedorProduto f WHERE f.precoUnitario like :precoUnitario")})
 public class FornecedorProduto implements Serializable {
 
     private static final long serialVersionUID = 1L;
