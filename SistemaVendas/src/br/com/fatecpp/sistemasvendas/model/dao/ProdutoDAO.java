@@ -69,7 +69,7 @@ public class ProdutoDAO implements DAOGenerico<Produto> {
         if (opcao.equals("consultarTodos")) {
         q = em.createNamedQuery("Produto.findAll");
         } else if (opcao.equals("consultarPorNome")){
-        q = em.createNamedQuery("Cliente.findByNome");
+        q = em.createNamedQuery("Produto.findByNome");
         q.setParameter("nome", "%" + parametro + "%");
         } else if (opcao.equals("consultarPorId")){
         q = em.createNamedQuery("Produto.findByIdProduto");

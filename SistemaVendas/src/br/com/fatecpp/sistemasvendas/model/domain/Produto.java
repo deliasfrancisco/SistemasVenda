@@ -67,6 +67,6 @@ public class Produto implements Serializable {
 
     @Override
     public String toString() {
-        return "br.com.fatecpp.sistemasvendas.model.domain.Produto[ idProduto=" + idProduto + " ]";
+        return "br.com.fatecpp.sistemasvendas.model.domain.Produto[ idProduto =" + idProduto + " ]";
     }
 }
